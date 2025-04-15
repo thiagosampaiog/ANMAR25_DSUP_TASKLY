@@ -6,7 +6,7 @@ export class TaskRepository {
   }
 
   static async findAll() {
-    return prisma.task.findmany();
+    return prisma.task.findMany();
   }
 
   static async findById(id: number) {
