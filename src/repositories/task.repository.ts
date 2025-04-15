@@ -17,9 +17,9 @@ export class TaskRepository {
     return prisma.task.delete({ where: { id } });
   }
 
-  static async update(data: { title: string; description: string; id: number }){
+  static async update(id: number, data: { title: string; description: string }){
      return prisma.task.update({
-          where: { id: data.id },
+          where: { id },
           data: {
                title: data.title,
                description: data.description
