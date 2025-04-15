@@ -17,7 +17,7 @@ model Task {
   id          Int      @id @default(autoincrement())
   title       String
   description String?
-  status      Status
+  status      Status   @default(Todo)
   createdAt   DateTime @default(now())
   updateAt    DateTime @updatedAt
   notes       Note[]
