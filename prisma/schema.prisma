@@ -13,3 +13,28 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Task {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  status      Status
+  createdAt   DateTime @default(now())
+  updateAt    DateTime @updatedAt
+  notes       Note[]
+}
+
+model Note {
+  id        Int      @id @default(autoincrement())
+  content   String
+  taskId    Int
+  task      Task     @relation(fields: [taskId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Status {
+  Todo
+  InProgress
+  Done
+}
