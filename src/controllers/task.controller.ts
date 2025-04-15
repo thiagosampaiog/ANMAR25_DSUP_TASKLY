@@ -5,18 +5,22 @@ export class TaskController {
   static async create(req: Request, res: Response) {
     try {
       const task = await TaskService.createTask(req.body);
-      return res.status(201).json(task);
+      res.status(201).json(task);
+      return;
     } catch (error: any) {
-      return res.status(400).json({ message: error.message });
+      res.status(400).json({ message: error.message });
+      return;
     }
   }
 
   static async findAll(req: Request, res: Response) {
     try {
       const tasks = await TaskService.getAllTasks();
-      return res.json(tasks);
+      res.json(tasks);
+      return;
     } catch (error: any) {
-      return res.status(500).json({ message: error.message });
+      res.status(500).json({ message: error.message });
+      return;
     }
   }
 
@@ -24,9 +28,11 @@ export class TaskController {
     try {
       const id = Number(req.params.id);
       const task = await TaskService.getTaskById(id);
-      return res.json(task);
+      res.json(task);
+      return;
     } catch (error: any) {
-      return res.status(404).json({ message: error.message });
+      res.status(404).json({ message: error.message });
+      return;
     }
   }
 
@@ -34,9 +40,11 @@ export class TaskController {
     try {
       const id = Number(req.params.id);
       const UpdatedTask = await TaskService.updateTask(id, req.body);
-      return res.json(UpdatedTask);
+      res.json(UpdatedTask);
+      return;
     } catch (error: any) {
-      return res.status(400).json({ message: error.message });
+      res.status(400).json({ message: error.message });
+      return;
     }
   }
 
@@ -44,9 +52,11 @@ export class TaskController {
     try {
       const id = Number(req.params.id);
       await TaskService.deleteTask(id);
-      return res.status(204).send();
+      res.status(204).send();
+      return;
     } catch (error: any) {
-      return res.status(400).json({ message: error.message });
+      res.status(400).json({ message: error.message });
+      return;
     }
   }
 }
