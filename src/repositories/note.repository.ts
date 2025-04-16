@@ -16,11 +16,12 @@ export class NoteRepository {
     });
   }
 
-  static async findAllByTask(taskId: number, skip: number, take: number) {
+  static async findAllByTask(taskId: number, skip: number = 0, take: number = 10) {
     return prisma.note.findMany({
       where: { taskId },
       skip,
       take,
+      orderBy: { createdAt: 'desc' },
     });
   }
 

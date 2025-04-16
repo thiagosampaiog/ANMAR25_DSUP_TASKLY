@@ -7,7 +7,11 @@ export class TaskRepository {
   }
 
   static async findAll( skip: number, take: number) {
-    return prisma.task.findMany({ skip, take });
+    return prisma.task.findMany({ 
+      skip, 
+      take, 
+      orderBy: { createdAt: 'desc' } 
+    });
   }
 
   static async findById(id: number) {
@@ -33,6 +37,7 @@ export class TaskRepository {
       where: { status },
       skip,
       take,
+      orderBy: { createdAt: 'desc' },
     })
   }
   

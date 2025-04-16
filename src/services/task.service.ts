@@ -1,11 +1,12 @@
 import { TaskRepository } from "../repositories/task.repository";
 import { Status } from "@prisma/client";
+import { AppError } from "../middlewares/appError";
 
 export class TaskService {
   static async createTask(data: { title: string; description: string }) {
     if (!data.title || !data.description) {
 
-      throw new Error("Title and description are required");
+      throw new AppError("Title and description are required", 400);
 
     }
     return TaskRepository.create(data);
@@ -21,7 +22,7 @@ export class TaskService {
     const task = await TaskRepository.findById(id);
 
     if (!task) {
-      throw new Error("Task not found");
+      throw new AppError("Task not found", 404);
     }
     return task;
   }
@@ -31,7 +32,7 @@ export class TaskService {
     const existingTask = await TaskRepository.findById(id);
 
     if (!existingTask) {
-      throw new Error("Task not found");
+      throw new AppError("Task not found", 404);
     }
 
     return TaskRepository.update(id, data);
@@ -41,7 +42,7 @@ export class TaskService {
     const task = await TaskRepository.findById(id);
 
     if (!task) {
-      throw new Error("Task not found");
+      throw new AppError("Task not found", 404);
     }
 
     return TaskRepository.delete(id);
