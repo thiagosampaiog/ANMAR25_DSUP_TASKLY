@@ -1,4 +1,5 @@
 import { TaskRepository } from "../repositories/task.repository";
+import { Status } from "@prisma/client";
 
 export class TaskService {
   static async createTask(data: { title: string; description: string }) {
@@ -44,5 +45,10 @@ export class TaskService {
     }
 
     return TaskRepository.delete(id);
+  }
+
+  static async findTasksByStatus(status: Status) {
+    
+    return TaskRepository.findByStatus(status as Status);
   }
 }

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { TaskService } from "../services/task.service";
+import { Status } from "@prisma/client";
 
 export class TaskController {
   static async create(req: Request, res: Response) {
@@ -54,6 +55,25 @@ export class TaskController {
       await TaskService.deleteTask(id);
       res.status(204).send();
       return;
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+      return;
+    }
+  }
+
+  static async getTasksByStatus(req: Request, res: Response) {
+    try {
+      const statusParam = req.params.status;
+  
+      if (!Object.values(Status).includes(statusParam as Status)) {
+        res.status(400).json({ message: "Status inválido" });
+        return;
+      }
+  
+      const tasks = await TaskService.findTasksByStatus(statusParam as Status);
+      res.status(200).json(tasks);
+      return;
+
     } catch (error: any) {
       res.status(400).json({ message: error.message });
       return;

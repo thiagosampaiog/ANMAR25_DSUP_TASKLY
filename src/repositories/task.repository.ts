@@ -1,3 +1,4 @@
+import { Status } from "@prisma/client";
 import { prisma } from "../database/prisma";
 
 export class TaskRepository {
@@ -26,5 +27,12 @@ export class TaskRepository {
           }
      });
   }
+
+  static async findByStatus(status: Status) {
+    return prisma.task.findMany({
+      where: { status }
+    })
+  }
+  
 }
 

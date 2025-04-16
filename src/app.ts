@@ -1,6 +1,6 @@
 import express from "express";
 import taskRoutes from "./routes/task.routes";
-import noteRoutes from "./routes/note.routes"
+import noteRoutes from "./routes/note.routes";
 
 const port = 3000;
 
