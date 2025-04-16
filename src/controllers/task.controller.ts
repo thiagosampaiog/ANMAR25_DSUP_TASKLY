@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { TaskService } from "../services/task.service";
 import { Status } from "@prisma/client";
+import { getPaginationParams } from "../utils/pagination";
 
 export class TaskController {
   static async create(req: Request, res: Response) {
@@ -79,4 +80,5 @@ export class TaskController {
       return;
     }
   }
+
 }
