@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsx src/app.ts",
     "build": "tsc",
-    "start": "node dist/app.js"
+    "start": "ts-node-dev src/app.ts"
   },
   "keywords": [],
   "author": "",
@@ -15,7 +15,8 @@
   "description": "",
   "dependencies": {
     "@prisma/client": "^6.6.0",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/express": "^5.0.1",
