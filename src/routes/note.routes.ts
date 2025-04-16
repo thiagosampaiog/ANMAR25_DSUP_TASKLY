@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { NoteController } from "../controllers/note.controller";
+import { validateData } from "../middlewares/validate";
+import { createNoteSchema, updateNoteSchema } from "../schemas/note.schemas";
 
 const router = Router();
 
