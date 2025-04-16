@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import { NoteService } from "../services/note.service";
+import { getPaginationParams } from "../utils/pagination";
 
 export class NoteController {
   static async create(req: Request, res: Response) {
     try {
-      const taskId = Number(req.params.taskId);
+      const taskId = parseInt(req.params.taskId);
 
       const note = await NoteService.createNote(taskId, req.body);
 
@@ -18,9 +19,10 @@ export class NoteController {
 
   static async getNotesByTask(req: Request, res: Response) {
     try {
-      const taskId = Number(req.params.taskId);
+      const taskId = parseInt(req.params.taskId);
+      const { skip, take } = getPaginationParams(req.query)
 
-      const notes = await NoteService.getAllNotesByTask(taskId);
+      const notes = await NoteService.getAllNotesByTask(taskId, skip, take);
 
        res.json(notes);
        return;
@@ -32,7 +34,7 @@ export class NoteController {
 
   static async getNote(req: Request, res: Response) {
     try {
-      const id = Number(req.params.id);
+      const id = parseInt(req.params.id);
 
       const note = await NoteService.getNoteById(id);
 
@@ -46,7 +48,7 @@ export class NoteController {
 
   static async update(req: Request, res: Response) {
     try {
-      const id = Number(req.params.id);
+      const id = parseInt(req.params.id);
 
       const updatedNote = await NoteService.updateNote(id, req.body);
 
@@ -60,7 +62,7 @@ export class NoteController {
 
   static async delete(req: Request, res: Response) {
     try {
-      const id = Number(req.params.id);
+      const id = parseInt(req.params.id);
 
       await NoteService.deleteNote(id);
 

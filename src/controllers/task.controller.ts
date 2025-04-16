@@ -17,7 +17,8 @@ export class TaskController {
 
   static async findAll(req: Request, res: Response) {
     try {
-      const tasks = await TaskService.getAllTasks();
+      const { skip, take } = getPaginationParams(req.query);
+      const tasks = await TaskService.getAllTasks(skip, take);
       res.json(tasks);
       return;
     } catch (error: any) {
@@ -64,14 +65,15 @@ export class TaskController {
 
   static async getTasksByStatus(req: Request, res: Response) {
     try {
-      const statusParam = req.params.status;
-  
-      if (!Object.values(Status).includes(statusParam as Status)) {
+      const { status } = req.params;
+      const { skip, take } = getPaginationParams(req.query);
+
+      if (!Object.values(Status).includes(status as Status)) {
         res.status(400).json({ message: "Status inválido" });
         return;
       }
   
-      const tasks = await TaskService.findTasksByStatus(statusParam as Status);
+      const tasks = await TaskService.findTasksByStatus(status as Status,skip, take);
       res.status(200).json(tasks);
       return;
 

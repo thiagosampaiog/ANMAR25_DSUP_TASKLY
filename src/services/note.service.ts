@@ -16,14 +16,14 @@ export class NoteService {
     return NoteRepository.create(taskId, data);
   }
 
-  static async getAllNotesByTask(taskId: number) {
+  static async getAllNotesByTask(taskId: number, take: number = 10, skip: number = 0 ) {
     const task = await TaskRepository.findById(taskId);
 
     if (!task) {
       throw new Error("Task not found");
     }
 
-    return NoteRepository.findAllByTask(taskId);
+    return NoteRepository.findAllByTask(taskId, take, skip);
   }
 
   static async getNoteById(id: number) {

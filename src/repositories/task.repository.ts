@@ -6,8 +6,8 @@ export class TaskRepository {
     return prisma.task.create({ data });
   }
 
-  static async findAll() {
-    return prisma.task.findMany();
+  static async findAll( skip: number, take: number) {
+    return prisma.task.findMany({ skip, take });
   }
 
   static async findById(id: number) {
@@ -28,9 +28,11 @@ export class TaskRepository {
      });
   }
 
-  static async findByStatus(status: Status) {
+  static async findByStatus(status: Status, skip: number, take: number) {
     return prisma.task.findMany({
-      where: { status }
+      where: { status },
+      skip,
+      take,
     })
   }
   
