@@ -10,3 +10,16 @@ export const updateTaskSchema = z.object({
      description: z.string(),
      status: z.enum(["Todo","InProgress","Done"]),
 });
+
+export const querySchema = z.object({
+     q: z.string().min(1),
+     sort: z.string().optional(),
+})
+
+export const paramsIdSchema = z.object({
+     id: z.coerce.number().int().positive()
+})
+
+export const paramsTaskIdSchema = z.object({
+     taskId: z.coerce.number().int().positive()
+})
