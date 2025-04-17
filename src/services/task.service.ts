@@ -52,4 +52,14 @@ export class TaskService {
     
     return TaskRepository.findByStatus(status as Status, skip, take);
   }
+
+  static async searchByTitle(q: string){
+
+    if(!q || typeof q !== 'string'){
+      throw new AppError('Query parameter is required and must be a string', 400)
+    }
+
+    return TaskRepository.searchByTitle(q);
+  }
+
 }

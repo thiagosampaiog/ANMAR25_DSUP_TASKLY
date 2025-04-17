@@ -9,9 +9,13 @@ router.post('/tasks', validateData(createTaskSchema), TaskController.create);
 router.get('/tasks', TaskController.findAll);
 router.get('/tasks/:id', TaskController.findById);
 
+router.get('tasks/search', TaskController.searchByTasksTitle);
+
+
 router.get('/tasks/status/:status', TaskController.getTasksByStatus);
 
 router.put('/tasks/:id', validateData(updateTaskSchema), TaskController.update);
 router.delete('/tasks/:id', TaskController.delete);
+
 
 export default router;

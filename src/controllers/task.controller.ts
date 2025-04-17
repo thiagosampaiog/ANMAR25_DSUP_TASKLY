@@ -72,15 +72,30 @@ export class TaskController {
         res.status(400).json({ message: "Status inválido" });
         return;
       }
-  
-      const tasks = await TaskService.findTasksByStatus(status as Status,skip, take);
+
+      const tasks = await TaskService.findTasksByStatus(
+        status as Status,
+        skip,
+        take
+      );
       res.status(200).json(tasks);
       return;
-
     } catch (error: any) {
       res.status(400).json({ message: error.message });
       return;
     }
   }
 
+  static async searchByTasksTitle(req: Request, res: Response) {
+    const { q } = req.query;
+
+    try {
+      const tasks = await TaskService.searchByTitle(q as string);
+      res.status(200).json(tasks);
+      return;
+    } catch (error: any) {
+      res.status(400).json({ message: error.message });
+      return;
+    }
+  }
 }

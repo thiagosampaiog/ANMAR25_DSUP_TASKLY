@@ -41,5 +41,16 @@ export class TaskRepository {
     })
   }
   
+  static async searchByTitle(q: string) {
+   return prisma.task.findMany({
+    where: {
+      title: {
+        contains: q,
+      }
+    }
+   })
+  }
+
+  
 }
 
