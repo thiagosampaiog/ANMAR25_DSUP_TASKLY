@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { TaskService } from "../services/task.service";
-import { Status } from "@prisma/client";
+import { Priority, Status } from "@prisma/client";
 import { getPaginationParams } from "../utils/pagination";
+
 
 export class TaskController {
   static async create(req: Request, res: Response) {
@@ -10,7 +11,7 @@ export class TaskController {
       res.status(201).json(task);
       return;
     } catch (error: any) {
-      res.status(400).json({ message: error.message });
+      res.status(500).json({ message: error.message });
       return;
     }
   }
@@ -34,7 +35,7 @@ export class TaskController {
       res.json(task);
       return;
     } catch (error: any) {
-      res.status(404).json({ message: error.message });
+      res.status(500).json({ message: error.message });
       return;
     }
   }
@@ -46,7 +47,7 @@ export class TaskController {
       res.json(UpdatedTask);
       return;
     } catch (error: any) {
-      res.status(400).json({ message: error.message });
+      res.status(500).json({ message: error.message });
       return;
     }
   }
@@ -58,7 +59,7 @@ export class TaskController {
       res.status(204).send();
       return;
     } catch (error: any) {
-      res.status(400).json({ message: error.message });
+      res.status(500).json({ message: error.message });
       return;
     }
   }
@@ -69,7 +70,7 @@ export class TaskController {
       const { skip, take } = getPaginationParams(req.query);
 
       if (!Object.values(Status).includes(status as Status)) {
-        res.status(400).json({ message: "Status inválido" });
+        res.status(500).json({ message: "Invalid Status" });
         return;
       }
 
@@ -81,7 +82,7 @@ export class TaskController {
       res.status(200).json(tasks);
       return;
     } catch (error: any) {
-      res.status(400).json({ message: error.message });
+      res.status(500).json({ message: error.message });
       return;
     }
   }
@@ -94,7 +95,28 @@ export class TaskController {
       res.status(200).json(tasks);
       return;
     } catch (error: any) {
-      res.status(400).json({ message: error.message });
+      res.status(500).json({ message: error.message });
+      return;
+    }
+  }
+
+  static async getTasksByPriority(req: Request<{priority: string}>, res: Response){
+    try {
+      const { priority } = req.params;
+      const { skip, take } = getPaginationParams(req.query);
+      if (!Object.values(Priority).includes(priority as Priority)){
+        res.status(400).json({ message: "Invalid Priority" });
+        return;
+      }
+      const tasks = await TaskService.findTasksByPriority(
+        priority as Priority,
+        skip,
+        take
+      );
+      res.status(200).json(tasks);
+      return;
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
       return;
     }
   }
