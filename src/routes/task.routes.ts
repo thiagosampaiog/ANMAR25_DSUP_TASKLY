@@ -11,7 +11,7 @@ router.get('/tasks/:id', validateParams(paramsIdSchema),TaskController.findById)
 
 router.get('/tasks/search', validateData(querySchema), TaskController.searchByTasksTitle);
 
-
+router.get('/tasks/priority/:priority', TaskController.getTasksByPriority)
 router.get('/tasks/status/:status', TaskController.getTasksByStatus);
 
 router.put('/tasks/:id', validateData(updateTaskSchema), validateParams(paramsIdSchema), TaskController.update);
