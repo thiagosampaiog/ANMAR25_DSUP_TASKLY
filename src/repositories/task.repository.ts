@@ -1,4 +1,4 @@
-import { Status } from "@prisma/client";
+import { Priority, Status } from "@prisma/client";
 import { prisma } from "../database/prisma";
 
 export class TaskRepository {
@@ -51,6 +51,15 @@ export class TaskRepository {
    })
   }
 
-  
+  static async findByPriority(priority: Priority, skip: number, take: number){
+   return prisma.task.findMany({
+    where: { priority },
+    skip,
+    take,
+    orderBy: { createdAt: 'desc'},
+  })
 }
+
+}
+
 

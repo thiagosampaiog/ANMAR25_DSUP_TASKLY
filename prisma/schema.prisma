@@ -18,7 +18,7 @@ model Task {
   title       String
   description String?
   status      Status   @default(Todo)
-  Priority    Priority @default(Medium)
+  priority    Priority @default(Medium)
   createdAt   DateTime @default(now())
   updateAt    DateTime @updatedAt
   notes       Note[]
