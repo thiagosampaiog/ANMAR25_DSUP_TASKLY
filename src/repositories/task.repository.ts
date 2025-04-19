@@ -6,30 +6,33 @@ export class TaskRepository {
     return prisma.task.create({ data });
   }
 
-  static async findAll( skip: number, take: number) {
-    return prisma.task.findMany({ 
-      skip, 
-      take, 
-      orderBy: { createdAt: 'desc' } 
+  static async findAll(skip: number, take: number) {
+    return prisma.task.findMany({
+      skip,
+      take,
+      orderBy: { createdAt: "desc" },
     });
   }
 
   static async findById(id: number) {
-    return prisma.task.findUnique({ where: { id } }); 
+    return prisma.task.findUnique({ where: { id } });
   }
 
   static async delete(id: number) {
     return prisma.task.delete({ where: { id } });
   }
 
-  static async update(id: number, data: { title: string; description: string }){
-     return prisma.task.update({
-          where: { id },
-          data: {
-               title: data.title,
-               description: data.description
-          }
-     });
+  static async update(
+    id: number,
+    data: { title: string; description: string }
+  ) {
+    return prisma.task.update({
+      where: { id },
+      data: {
+        title: data.title,
+        description: data.description,
+      },
+    });
   }
 
   static async findByStatus(status: Status, skip: number, take: number) {
@@ -37,29 +40,26 @@ export class TaskRepository {
       where: { status },
       skip,
       take,
-      orderBy: { createdAt: 'desc' },
-    })
+      orderBy: { createdAt: "desc" },
+    });
   }
-  
+
   static async searchByTitle(q: string) {
-   return prisma.task.findMany({
-    where: {
-      title: {
-        contains: q,
-      }
-    }
-   })
+    return prisma.task.findMany({
+      where: {
+        title: {
+          contains: q,
+        },
+      },
+    });
   }
 
-  static async findByPriority(priority: Priority, skip: number, take: number){
-   return prisma.task.findMany({
-    where: { priority },
-    skip,
-    take,
-    orderBy: { createdAt: 'desc'},
-  })
+  static async findByPriority(priority: Priority, skip: number, take: number) {
+    return prisma.task.findMany({
+      where: { priority },
+      skip,
+      take,
+      orderBy: { createdAt: "desc" },
+    });
+  }
 }
-
-}
-
-

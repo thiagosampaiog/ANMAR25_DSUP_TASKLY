@@ -1,5 +1,5 @@
 import { TaskRepository } from "../repositories/task.repository";
-import { Status } from "@prisma/client";
+import { Priority, Status } from "@prisma/client";
 import { AppError } from "../middlewares/appError";
 
 export class TaskService {
@@ -62,4 +62,7 @@ export class TaskService {
     return TaskRepository.searchByTitle(q);
   }
 
+  static async findTasksByPriority(priority: Priority, skip = 0, take = 10) {
+    return TaskRepository.findByPriority(priority as Priority, skip, take)
+  }
 }
