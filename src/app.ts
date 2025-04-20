@@ -1,7 +1,7 @@
 import express from "express";
-import taskRoutes from "./routes/task.routes";
-import noteRoutes from "./routes/note.routes";
-import { errorHandler } from "./middlewares/errorHandler";
+import taskRoutes from "./routes/task.routes.js";
+import noteRoutes from "./routes/note.routes.js";
+import { errorHandler } from "./middlewares/errorHandler.js";
 
 const port = 3000;
 

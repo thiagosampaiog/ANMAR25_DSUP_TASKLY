@@ -1,5 +1,5 @@
 import { Priority, Status } from "@prisma/client";
-import { prisma } from "../database/prisma";
+import { prisma } from "../database/prisma.js";
 
 export class TaskRepository {
   static async create(data: { title: string; description: string }) {

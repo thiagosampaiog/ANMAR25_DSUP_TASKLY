@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { NoteService } from "../services/note.service";
-import { getPaginationParams } from "../utils/pagination";
+import { NoteService } from "../services/note.service.js";
+import { getPaginationParams } from "../utils/pagination.js";
 
 export class NoteController {
   static async create(req: Request, res: Response) {

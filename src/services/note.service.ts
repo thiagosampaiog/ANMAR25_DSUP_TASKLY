@@ -1,6 +1,6 @@
-import { NoteRepository } from "../repositories/note.repository";
-import { TaskRepository } from "../repositories/task.repository";
-import { AppError } from "../middlewares/appError";
+import { NoteRepository } from "../repositories/note.repository.js";
+import { TaskRepository } from "../repositories/task.repository.js";
+import { AppError } from "../middlewares/appError.js";
 
 export class NoteService {
   static async createNote(taskId: number, data: { content: string }) {

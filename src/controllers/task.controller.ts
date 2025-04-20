@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { TaskService } from "../services/task.service";
+import { TaskService } from "../services/task.service.js";
 import { Priority, Status } from "@prisma/client";
-import { getPaginationParams } from "../utils/pagination";
+import { getPaginationParams } from "../utils/pagination.js";
 
 
 export class TaskController {

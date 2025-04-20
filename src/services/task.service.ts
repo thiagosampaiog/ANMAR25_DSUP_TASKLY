@@ -1,6 +1,6 @@
-import { TaskRepository } from "../repositories/task.repository";
+import { TaskRepository } from "../repositories/task.repository.js";
 import { Priority, Status } from "@prisma/client";
-import { AppError } from "../middlewares/appError";
+import { AppError } from "../middlewares/appError.js";
 
 export class TaskService {
   static async createTask(data: { title: string; description: string }) {

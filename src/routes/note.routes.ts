@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { NoteController } from "../controllers/note.controller";
-import { validateData, validateParams } from "../middlewares/validate";
-import { createNoteSchema, updateNoteSchema } from "../schemas/note.schemas";
-import { paramsIdSchema, paramsTaskIdSchema } from "../schemas/task.schemas";
+import { NoteController } from "../controllers/note.controller.js";
+import { validateData, validateParams } from "../middlewares/validate.js";
+import { createNoteSchema, updateNoteSchema } from "../schemas/note.schemas.js";
+import { paramsIdSchema, paramsTaskIdSchema } from "../schemas/task.schemas.js";
 
 const router = Router();
 
