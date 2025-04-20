@@ -1,0 +1,33 @@
+services:
+  api:
+    build: .
+    container_name: api-taskly
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: mysql://root:MySQL123!@db:3306/taskly
+    networks:
+      - app-network
+
+  db:
+    image: mysql:8
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: MySQL123!
+      MYSQL_DATABASE: taskly
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysqldata:/var/lib/mysql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysqldata:
