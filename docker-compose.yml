@@ -7,7 +7,7 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: mysql://root:MySQL123!@db:3306/taskly
+      - DATABASE_URL=${DATABASE_URL}
     networks:
       - app-network
 
@@ -16,7 +16,7 @@ services:
     container_name: mysql-db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: MySQL123!
+      MYSQL_ROOT_PASSWORD: MySQL1234!
       MYSQL_DATABASE: taskly
     ports:
       - "3306:3306"

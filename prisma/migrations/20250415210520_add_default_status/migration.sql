@@ -1,2 +1,2 @@
 -- AlterTable
-ALTER TABLE `task` MODIFY `status` ENUM('Todo', 'InProgress', 'Done') NOT NULL DEFAULT 'Todo';
+ALTER TABLE `Task` MODIFY `status` ENUM('Todo', 'InProgress', 'Done') NOT NULL DEFAULT 'Todo';

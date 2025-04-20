@@ -1,2 +1,2 @@
 -- AlterTable
-ALTER TABLE `task` ADD COLUMN `Priority` ENUM('Low', 'Medium', 'High') NOT NULL DEFAULT 'Medium';
+ALTER TABLE `Task` ADD COLUMN `Priority` ENUM('Low', 'Medium', 'High') NOT NULL DEFAULT 'Medium';
