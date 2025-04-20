@@ -16,9 +16,9 @@ export class TaskService {
     return TaskRepository.create(data);
   }
 
-  static async getAllTasks(skip = 0, take = 10) {
+  static async getAllTasks(skip = 0, take = 10, where: any = {}) {
 
-    return TaskRepository.findAll(skip, take);
+    return TaskRepository.findAll(skip, take, where);
   }
 
   static async getTaskById(id: number) {
@@ -52,13 +52,7 @@ export class TaskService {
     return TaskRepository.delete(id);
   }
 
-  static async findTasksByStatus(status: Stat, skip = 0, take = 10) {
-    
-    return TaskRepository.findByStatus(status as Stat, skip, take);
-  }
-
-
-  static async findTasksByPriority(priority: Prior, skip = 0, take = 10) {
-    return TaskRepository.findByPriority(priority as Prior, skip, take)
-  }
+  static async countAllTasks(where: any = {}) {
+    return TaskRepository.countAll(where);
+  } 
 }

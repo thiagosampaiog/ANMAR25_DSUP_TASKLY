@@ -10,10 +10,11 @@ export class TaskRepository {
     return prisma.task.create({ data });
   }
 
-  static async findAll(skip: number, take: number) {
+  static async findAll(skip: number, take: number, where: any = {}) {
     return prisma.task.findMany({
       skip,
       take,
+      where,
       orderBy: { createdAt: "desc" },
     });
   }
@@ -40,23 +41,8 @@ export class TaskRepository {
       },
     });
   }
-
-  static async findByStatus(status: Stat, skip: number, take: number) {
-    return prisma.task.findMany({
-      where: { status },
-      skip,
-      take,
-      orderBy: { createdAt: "desc" },
-    });
+  static async countAll(where: any = {}) {  
+    return prisma.task.count({ where });
   }
 
-
-  static async findByPriority(priority: Prior, skip: number, take: number) {
-    return prisma.task.findMany({
-      where: { priority },
-      skip,
-      take,
-      orderBy: { createdAt: "desc" },
-    });
-  }
 }
