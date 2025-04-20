@@ -31,7 +31,7 @@ export class TaskService {
     return task;
   }
 
-  static async updateTask( id: number, data: { title: string; description: string }) {
+  static async updateTask( id: number, data: { title: string; description: string;  status: Stat; priority: Prior }) {
 
     const existingTask = await TaskRepository.findById(id);
 

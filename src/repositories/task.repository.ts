@@ -28,13 +28,15 @@ export class TaskRepository {
 
   static async update(
     id: number,
-    data: { title: string; description: string }
+    data: { title: string; description: string; status: Stat; priority: Prior }
   ) {
     return prisma.task.update({
       where: { id },
       data: {
         title: data.title,
         description: data.description,
+        status: data.status,
+        priority: data.priority,
       },
     });
   }

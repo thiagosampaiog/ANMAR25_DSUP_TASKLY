@@ -24,6 +24,7 @@ COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/.env .env 
 
 
+RUN npx prisma migrate deploy
 
 
 EXPOSE 3000
