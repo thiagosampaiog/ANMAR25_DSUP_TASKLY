@@ -96,5 +96,49 @@ export class TaskController {
     }
   }
 
+  static async getTasksByPriority(req: Request<{priority: string}>, res: Response){
+    try {
+      const { priority } = req.params;
+      const { skip, take } = getPaginationParams(req.query);
+      if (!Object.values(Priority).includes(priority as Prior)){
+        res.status(400).json({ message: "Invalid Priority" });
+        return;
+      }
+      const tasks = await TaskService.findTasksByPriority(
+        priority as Prior,
+        skip,
+        take
+      );
+      res.status(200).json(tasks);
+      return;
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+      return;
+    }
+  }
+
+
+  static async getTasksByStatus(req: Request, res: Response) {
+    try {
+      const { status } = req.params;
+      const { skip, take } = getPaginationParams(req.query);
+
+      if (!Object.values(Status).includes(status as Stat)) {
+        res.status(500).json({ message: "Invalid Status" });
+        return;
+      }
+
+      const tasks = await TaskService.findTasksByStatus(
+        status as Stat,
+        skip,
+        take
+      );
+      res.status(200).json(tasks);
+      return;
+    } catch (error: any) {
+      res.status(500).json({ message: error.message });
+      return;
+    }
+  }
 
 }

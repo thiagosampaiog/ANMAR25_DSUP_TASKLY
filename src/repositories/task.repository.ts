@@ -45,4 +45,24 @@ export class TaskRepository {
     return prisma.task.count({ where });
   }
 
+
+  static async findByPriority(priority: Prior, skip: number, take: number) {
+    return prisma.task.findMany({
+      where: { priority },
+      skip,
+      take,
+      orderBy: { createdAt: "desc" },
+    });
+  }
+
+
+  static async findByStatus(status: Stat, skip: number, take: number) {
+    return prisma.task.findMany({
+      where: { status },
+      skip,
+      take,
+      orderBy: { createdAt: "desc" },
+    });
+  }
+  
 }

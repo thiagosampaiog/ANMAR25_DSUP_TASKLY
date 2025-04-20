@@ -55,4 +55,15 @@ export class TaskService {
   static async countAllTasks(where: any = {}) {
     return TaskRepository.countAll(where);
   } 
+
+
+  static async findTasksByPriority(priority: Prior, skip = 0, take = 10) {
+    return TaskRepository.findByPriority(priority as Prior, skip, take)
+  }
+
+  static async findTasksByStatus(status: Stat, skip = 0, take = 10) {
+    
+    return TaskRepository.findByStatus(status as Stat, skip, take);
+  }
+  
 }

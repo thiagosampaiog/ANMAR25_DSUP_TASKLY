@@ -11,10 +11,6 @@ export const updateTaskSchema = z.object({
      status: z.enum(["Todo","InProgress","Done"]).optional(),
 });
 
-export const querySchema = z.object({
-     q: z.string().min(1),
-     sort: z.string().optional(),
-})
 
 export const paramsIdSchema = z.object({
      id: z.coerce.number().int().positive()
@@ -23,3 +19,11 @@ export const paramsIdSchema = z.object({
 export const paramsTaskIdSchema = z.object({
      taskId: z.coerce.number().int().positive()
 })
+
+export const taskQuerySchema = z.object({
+     skip: z.coerce.number().int().nonnegative().default(0), 
+     take: z.coerce.number().int().positive().default(10),  
+     status: z.enum(["Todo", "InProgress", "Done"]).optional(), 
+     priority: z.string().optional(), 
+     title: z.string().optional(),    
+ });
