@@ -1,6 +1,10 @@
 import { TaskRepository } from "../repositories/task.repository.js";
-import { Priority, Status } from "@prisma/client";
 import { AppError } from "../middlewares/appError.js";
+import pkg from '@prisma/client';
+
+const { Priority, Status } = pkg;
+type Prior = (typeof Priority)[keyof typeof Priority];
+type Stat = (typeof Status)[keyof typeof Status];
 
 export class TaskService {
   static async createTask(data: { title: string; description: string }) {
@@ -48,9 +52,9 @@ export class TaskService {
     return TaskRepository.delete(id);
   }
 
-  static async findTasksByStatus(status: Status, skip = 0, take = 10) {
+  static async findTasksByStatus(status: Stat, skip = 0, take = 10) {
     
-    return TaskRepository.findByStatus(status as Status, skip, take);
+    return TaskRepository.findByStatus(status as Stat, skip, take);
   }
 
   static async searchByTitle(q: string){
@@ -62,7 +66,7 @@ export class TaskService {
     return TaskRepository.searchByTitle(q);
   }
 
-  static async findTasksByPriority(priority: Priority, skip = 0, take = 10) {
-    return TaskRepository.findByPriority(priority as Priority, skip, take)
+  static async findTasksByPriority(priority: Prior, skip = 0, take = 10) {
+    return TaskRepository.findByPriority(priority as Prior, skip, take)
   }
 }

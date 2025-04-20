@@ -1,4 +1,4 @@
-import { prisma } from "../database/prisma.js";
+import prisma from "../database/prisma.js";
 
 export class NoteRepository {
   static async create(taskId: number, data: { content: string }) {

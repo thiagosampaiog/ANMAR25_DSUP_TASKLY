@@ -1,7 +1,11 @@
 import { Request, Response } from "express";
 import { TaskService } from "../services/task.service.js";
-import { Priority, Status } from "@prisma/client";
 import { getPaginationParams } from "../utils/pagination.js";
+import pkg from '@prisma/client';
+
+const { Priority, Status } = pkg;
+type Prior = (typeof Priority)[keyof typeof Priority];
+type Stat = (typeof Status)[keyof typeof Status];
 
 
 export class TaskController {
@@ -69,13 +73,13 @@ export class TaskController {
       const { status } = req.params;
       const { skip, take } = getPaginationParams(req.query);
 
-      if (!Object.values(Status).includes(status as Status)) {
+      if (!Object.values(Status).includes(status as Stat)) {
         res.status(500).json({ message: "Invalid Status" });
         return;
       }
 
       const tasks = await TaskService.findTasksByStatus(
-        status as Status,
+        status as Stat,
         skip,
         take
       );
@@ -104,12 +108,12 @@ export class TaskController {
     try {
       const { priority } = req.params;
       const { skip, take } = getPaginationParams(req.query);
-      if (!Object.values(Priority).includes(priority as Priority)){
+      if (!Object.values(Priority).includes(priority as Prior)){
         res.status(400).json({ message: "Invalid Priority" });
         return;
       }
       const tasks = await TaskService.findTasksByPriority(
-        priority as Priority,
+        priority as Prior,
         skip,
         take
       );

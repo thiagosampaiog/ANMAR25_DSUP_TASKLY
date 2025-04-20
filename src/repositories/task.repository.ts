@@ -1,5 +1,9 @@
-import { Priority, Status } from "@prisma/client";
-import { prisma } from "../database/prisma.js";
+import prisma from "../database/prisma.js";
+import pkg from '@prisma/client';
+
+const { Priority, Status } = pkg;
+type Prior = (typeof Priority)[keyof typeof Priority];
+type Stat = (typeof Status)[keyof typeof Status];
 
 export class TaskRepository {
   static async create(data: { title: string; description: string }) {
@@ -35,7 +39,7 @@ export class TaskRepository {
     });
   }
 
-  static async findByStatus(status: Status, skip: number, take: number) {
+  static async findByStatus(status: Stat, skip: number, take: number) {
     return prisma.task.findMany({
       where: { status },
       skip,
@@ -54,7 +58,7 @@ export class TaskRepository {
     });
   }
 
-  static async findByPriority(priority: Priority, skip: number, take: number) {
+  static async findByPriority(priority: Prior, skip: number, take: number) {
     return prisma.task.findMany({
       where: { priority },
       skip,
