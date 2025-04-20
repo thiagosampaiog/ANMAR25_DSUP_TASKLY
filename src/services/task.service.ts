@@ -57,14 +57,6 @@ export class TaskService {
     return TaskRepository.findByStatus(status as Stat, skip, take);
   }
 
-  static async searchByTitle(q: string){
-
-    if(!q || typeof q !== 'string'){
-      throw new AppError('Query parameter is required and must be a string', 400)
-    }
-
-    return TaskRepository.searchByTitle(q);
-  }
 
   static async findTasksByPriority(priority: Prior, skip = 0, take = 10) {
     return TaskRepository.findByPriority(priority as Prior, skip, take)

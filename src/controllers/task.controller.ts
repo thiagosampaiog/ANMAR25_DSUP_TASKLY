@@ -91,18 +91,6 @@ export class TaskController {
     }
   }
 
-  static async searchByTasksTitle(req: Request, res: Response) {
-    const { q } = req.query;
-
-    try {
-      const tasks = await TaskService.searchByTitle(q as string);
-      res.status(200).json(tasks);
-      return;
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-      return;
-    }
-  }
 
   static async getTasksByPriority(req: Request<{priority: string}>, res: Response){
     try {

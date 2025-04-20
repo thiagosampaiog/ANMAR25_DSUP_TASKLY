@@ -50,15 +50,6 @@ export class TaskRepository {
     });
   }
 
-  static async searchByTitle(q: string) {
-    return prisma.task.findMany({
-      where: {
-        title: {
-          contains: q,
-        },
-      },
-    });
-  }
 
   static async findByPriority(priority: Prior, skip: number, take: number) {
     return prisma.task.findMany({
