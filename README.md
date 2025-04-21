@@ -118,7 +118,9 @@ To run the application with Docker, follow these steps:
 ```json
 {
   "title": "Task title",
-  "description": "Task description"
+  "description": "Task description",
+  "status": "Todo",
+  "priority": "Low"
 }
 ```
 **Response**: Newly created task
@@ -129,6 +131,8 @@ To run the application with Docker, follow these steps:
 {
   "title": "Updated title",
   "description": "Updated description"
+  "status": "Todo",
+  "priority": "Low"
 }
 ```
 **Response**: Updated task
