@@ -17,7 +17,7 @@ export class TaskService {
   }
 
   static async getAllTasks(skip = 0, take = 10, where: any = {}) {
-
+    
     return TaskRepository.findAll(skip, take, where);
   }
 

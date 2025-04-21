@@ -36,11 +36,11 @@ export class TaskController {
       }
   
       if (title) {
-        whereClause.title = {
-          contains: title as string,
-          mode: 'insensitive',
-        };
-      }
+        whereClause.OR = [
+          { title: { contains: title as string, mode: 'insensitive' } },
+          { description: { contains: title as string, mode: 'insensitive' } },
+        ];
+      } 
   
       const [tasks, totalTasks] = await Promise.all([
         TaskService.getAllTasks(skip, take, whereClause),
